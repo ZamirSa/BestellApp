@@ -8,7 +8,7 @@
     <title>BestellApp</title>
 </head>
 
-<body>
+<body onload="renderDishes();">
     <header>
         <nav>
             <img class="headerlogo" src="./img/Logo 02.png" alt="logo of the website">
@@ -19,7 +19,10 @@
         <section class="homepage">
             <img class="hero" src="./img/hero-bestellappwallpaper.png" alt="wallpaper image of pizza and burger">
             <img class="logo-burger" src="./img/logo-burger.png" alt="logo with a burger icon">
-            <h1><span>Burger</span>Hause</h1>
+            <div class="title">
+                <h1><span>Burger</span>Hause</h1>
+                <div class="reviewcontainer"><img src="./img/star.png" alt="star icon"><strong>4,1</strong> (317)</div>
+            </div>
             <h3>The best of Burgers, Pizza and Greens, all in one great place.</h3>
         </section>
 
@@ -30,6 +33,9 @@
                     <h2>Burger & Sandwiches</h2>
                 </span>
             </div>
+            <article id="burgers">
+
+            </article>
         </section>
 
         <section class="dishsections">
@@ -53,8 +59,10 @@
         </section>
     </main>
     <footer>
-
+        <p>©2025 BurgerHause</p>
+        <p>Imprint</p>
+        <p>Cookie Preferences</p>
     </footer>
+    <script src="./script.js"></script>
 </body>
-
 </html>

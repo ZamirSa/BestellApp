@@ -6,6 +6,7 @@ body {
     min-height: 100vh;
     font-family: "Palanquin", sans-serif;
     color: rgb(54, 53, 52);
+    font-size: 18px;
 }
 
 header {
@@ -25,7 +26,7 @@ main {
 
 nav {
     max-width: 1920px;
-    width: 1920px;
+    min-width: 1600px;
     margin-right: 60px;
     padding-left: 60px;
     display: flex;
@@ -48,7 +49,7 @@ nav {
     align-items: center;
     width: 100%;
     gap: 15px;
-    padding-bottom: 60px;
+    padding-bottom: 80px;
 }
 
 .hero {
@@ -62,6 +63,12 @@ nav {
     margin-top: -8%;
 }
 
+.title {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
 h1 {
     font-size: 48px;
     margin: 0;
@@ -69,6 +76,27 @@ h1 {
 
 h1 span {
     color: rgb(231, 108, 31);
+}
+
+.reviewcontainer {
+    background-color: rgba(250, 202, 172, 1);
+    border-radius: 4px;
+    height: 32px;
+    color: rgba(114, 109, 109, 1);
+    display: flex;
+    align-items: center;
+    padding: 4px;
+    gap: 7px;
+}
+
+.reviewcontainer img {
+    width: 24px;
+    height: 23px;
+}
+
+strong {
+    color: rgb(54, 53, 52);
+    font-size: 20px;
 }
 
 h3 {
@@ -80,7 +108,9 @@ h3 {
 
 .dishsections {
     width: 100%;
-    padding-bottom: 60px;
+    padding-bottom: 80px;
+    display: flex;
+    flex-direction: column;
 }
 
 .sectiontitlecontainer {
@@ -89,6 +119,7 @@ h3 {
     height: 60px;
     background-color: rgba(231, 108, 31, 1);
 }
+
 
 .sectiontitlecontainer img {
     height: 90px;
@@ -112,9 +143,63 @@ h2 {
 
 footer {
     background-color: rgba(231, 108, 31, 1);
-    height: 128px;
+    height: 100px;
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
+    gap: 60px;
+    color: white;
+    padding-top: 28px;
+}
+
+article {
+    align-self: center;
+    max-width: 1920px;
+    min-width: 1600px;
+}
+
+figure {
+    align-self: flex-start;
+    display: flex;
+    justify-content: space-between;
+    background-color: rgba(253, 234, 220, 1);
+    border-radius: 12px;
+    gap: 30px;
+    width: 825px;
+    padding: 15px;
+}
+
+figure img {
+    width: 200px;
+}
+
+figure div {
+    display: flex;
+    gap: 15px;
+}
+
+h4 {
+    font-size: 24px;
+    margin: 0;
+}
+
+figcaption {
+    font-size: 16px;
+}
+
+figure button {
+    background-color: white;
+    border: none;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 20px;
+    color: black;
+}
+
+.priceandbutton {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: space-between;
 }
