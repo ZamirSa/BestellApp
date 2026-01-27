@@ -12,18 +12,41 @@ function renderDishes() {
 //openBasket
 function openBasket() {
     let basket = document.getElementById("basket");
-    basket.classList.toggle("displayflex");
-    basket.innerHTML = getEmptyBasketTemplate();
 }
 
 //adds dishes to the basket
-function addBasket(iDish) {
-    let basket = document.getElementById("basket");
-    basket.classList.toggle("displayflex");
-    basket.innerHTML = ""
-    basket.innerHTML = getBasketTemplate(iDish);
+function renderBasket(iDish) {
+    let basketContentRef = document.getElementById("dishes");
+    basketContentRef.innerHTML = "";
+
+    for (let iBasket = 0; iBasket < myBasketDishes.dishTitles.length; iBasket++) {
+        basketContentRef.innerHTML += getBasketDishesTemplate(iBasket);
+    }
 }
 
+function addAmount(iDish) {
+    amountRef = document.getElementById("amount");
+    if (amountRef.innerHTML < 20) {
+        amountRef.innerHTML = myDishes[iDish].amount++;
+    }
+}
+
+function addDish(dishTitle, iDish) {
+    myBasketDishes.dishTitles.push(dishTitle);
+
+    renderBasket();
+
+    let addDishButton = document.getElementById('dishButton' + [iDish]);
+    addDishButton.classList.add("displaynone");
+
+    let addhiddenButton = document.getElementById('hiddenButton' + [iDish]);
+    addhiddenButton.classList.remove("displaynone");
+    addhiddenButton.classList.add("orange");
+
+    let addhiddenButtonText = document.getElementById('hiddenButtonText' + [iDish]);
+    addhiddenButtonText.classList.remove("displaynone");
+    addhiddenButtonText.classList.add("orange");
+}
 
 //HTML Templates
 function getDishTemplate(iDish, price) {
@@ -35,9 +58,21 @@ function getDishTemplate(iDish, price) {
     </div>
     <div class="priceandbutton">
         <h4>${price}</h4>
-    <button onclick="addBasket(${iDish})">Add to basket</button>
+    <div><button id="dishButton${iDish}" onclick="addDish('${myDishes[iDish].name}', '${iDish}');">Add to basket</button><button id="hiddenButtonText${iDish}" class="displaynone">Added</button><button onclick="addAmount(${iDish});" id="hiddenButton${iDish}" class="displaynone">+</button></div>
 </div>
 </figure>`
+}
+
+function getBasketDishesTemplate(iBasket) {
+    return `    
+    <div id="dish${iBasket}" class="basketDish">
+    <h6>${myBasketDishes.dishTitles[iBasket]}</h6>
+    <div>
+    <p id="amount">${myDishes[iBasket].amount}</p>
+    <img src="" alt="">
+    </div>
+    </div>`
+
 }
 
 function getEmptyBasketTemplate() {
@@ -51,18 +86,4 @@ function getEmptyBasketTemplate() {
             </p>
             <button onclick="openBasket();"><img src="./img/shopping_cart.png" alt="shopping cart icon"></button>
             </div>`
-}
-
-function getBasketTemplate(iDish) {
-    return `
-    <div class="basket">
-    <h5>Your Basket</h5>
-    <figure>
-    <h6>${myDishes[iDish].name}</h6>
-    <div>
-    <img src="" alt="">
-    
-    </div>
-    </figure>
-    </div>`
 }

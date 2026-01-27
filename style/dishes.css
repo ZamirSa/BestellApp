@@ -55,3 +55,7 @@ article figure button:hover {
     color: rgba(231, 108, 31, 1);
     box-shadow: 0 6px 8px 0 rgba(0, 0, 0, 0.2);
 }
+
+.orange {
+    color: rgba(231, 108, 31, 1);
+}

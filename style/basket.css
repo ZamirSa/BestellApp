@@ -1,10 +1,10 @@
-/* basket*/
+/*basket*/
 .basketsection {
     width: 100%;
     max-width: 1920px;
     height: 700px;
     position: fixed;
-    display: none;
+    display: flex;
     justify-content: flex-end;
     top: 128px;
     right: 0;
@@ -25,6 +25,26 @@
     color: rgb(253, 234, 220);
     font-size: 24px;
     gap: 60px;
+}
+
+.basket figure {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.basketDish {
+    background-color: rgba(250, 202, 172, 1);
+    color: rgb(54, 53, 52);
+    padding: 20px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+h6 {
+    margin: 0;
 }
 
 h5 {
