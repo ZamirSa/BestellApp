@@ -5,64 +5,88 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="./style/basket.css">
+    <link rel="stylesheet" href="./style/dishes.css">
     <title>BestellApp</title>
 </head>
 
 <body onload="renderDishes();">
+
+    <!--header-->
     <header>
         <nav>
             <img class="headerlogo" src="./img/Logo 02.png" alt="logo of the website">
-            <img class="menubar" src="./img/menu.png" alt="menu bar">
+            <button onclick="openBasket();"><img class="menubar" src="./img/menu.png" alt="menu bar"></button>
         </nav>
     </header>
+
+    <!--main-->
     <main>
-        <section class="homepage">
-            <img class="hero" src="./img/hero-bestellappwallpaper.png" alt="wallpaper image of pizza and burger">
-            <img class="logo-burger" src="./img/logo-burger.png" alt="logo with a burger icon">
-            <div class="title">
-                <h1><span>Burger</span>Hause</h1>
-                <div class="reviewcontainer"><img src="./img/star.png" alt="star icon"><strong>4,1</strong> (317)</div>
-            </div>
-            <h3>The best of Burgers, Pizza and Greens, all in one great place.</h3>
+        <!--content-->
+        <section class="content">
+            <!--homepage-->
+            <section class="homepage">
+                <img class="hero" src="./img/hero-bestellappwallpaper.png" alt="wallpaper image of pizza and burger">
+                <img class="logo-burger" src="./img/logo-burger.png" alt="logo with a burger icon">
+                <div class="title">
+                    <h1><span>Burger</span>Hause</h1>
+                    <div class="reviewcontainer">
+                        <img src="./img/star.png" alt="star icon"><strong>4,1</strong> (317)
+                    </div>
+                </div>
+                <h3>The best of Burgers, Pizza and Greens, all in one great place.</h3>
+            </section>
+
+            <!--Burger&Sandwiches-->
+            <section class="dishsections">
+                <div class="sectiontitlecontainer">
+                    <span>
+                        <img src="./img/burger-icon.png" alt="">
+                        <h2>Burger & Sandwiches</h2>
+                    </span>
+                </div>
+                <article id="burgers">
+
+                </article>
+            </section>
+
+            <!--Pizza-->
+            <section class="dishsections">
+                <div class="sectiontitlecontainer">
+                    <span>
+                        <img src="./img/Pizza 1.png" alt="">
+                        <h2>Pizza (30cm)</h2>
+                    </span>
+                </div>
+            </section>
+
+            <!--Salad-->
+            <section class="dishsections">
+                <div class="sectiontitlecontainer">
+                    <span>
+                        <img src="./img/Salad 1.png" alt="">
+                        <h2>Salad</h2>
+                    </span>
+                </div>
+            </section>
         </section>
 
-        <section class="dishsections">
-            <div class="sectiontitlecontainer">
-                <span>
-                    <img src="./img/burger-icon.png" alt="">
-                    <h2>Burger & Sandwiches</h2>
-                </span>
-            </div>
-            <article id="burgers">
 
-            </article>
-        </section>
-
-        <section class="dishsections">
-            <div class="sectiontitlecontainer">
-                <span>
-                    <img src="./img/Pizza 1.png" alt="">
-                    <h2>Pizza (30cm)</h2>
-                </span>
-            </div>
-
-        </section>
-
-        <section class="dishsections">
-            <div class="sectiontitlecontainer">
-                <span>
-                    <img src="./img/Salad 1.png" alt="">
-                    <h2>Salad</h2>
-                </span>
-            </div>
-
+        <!--basket-->
+        <section class="basketsection" id="basket">
         </section>
     </main>
+
+    <!--footer-->
     <footer>
         <p>©2025 BurgerHause</p>
         <p>Imprint</p>
         <p>Cookie Preferences</p>
     </footer>
+
     <script src="./script.js"></script>
+    <script src="./scripts/db.js"></script>
+
 </body>
+
 </html>

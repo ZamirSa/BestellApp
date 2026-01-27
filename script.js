@@ -1,31 +1,4 @@
-let myDishes = [
-    {
-        "name": "Veggie mushroom black burger",
-        "price": 16.90,
-        "description": "Mixed green salad, Tomatoes, Edamame, Mushrooms",
-        "image": "VeggieMushroomBlackBurger.png"
-    },
-    {
-        "name": "All meat burger",
-        "price": 15.90,
-        "description": "Beef, Bacon, Dill pickles, Smoked cheese, Ketchup, BBQ souse",
-        "image": "AllMeatBurger.png"
-    },
-    {
-        "name": "Beef red burger",
-        "price": 14.90,
-        "description": "Beef, Cheese, Tomatoes, Lettuce, Onion",
-        "image": "BeefRedBurger.png"
-    },
-    {
-        "name": "Big chicken burger",
-        "price": 15.90,
-        "description": "Chicken, Cheese, Tomatoes, Lettuce, Onion, Bell pepper",
-        "image": "BigChickenBurger.png"
-    }
-];
-
-//render Dishes
+//render dishes
 function renderDishes() {
     let dishesContentRef = document.getElementById('burgers');
     dishesContentRef.innerHTML = "";
@@ -36,6 +9,23 @@ function renderDishes() {
     }
 }
 
+//openBasket
+function openBasket() {
+    let basket = document.getElementById("basket");
+    basket.classList.toggle("displayflex");
+    basket.innerHTML = getEmptyBasketTemplate();
+}
+
+//adds dishes to the basket
+function addBasket(iDish) {
+    let basket = document.getElementById("basket");
+    basket.classList.toggle("displayflex");
+    basket.innerHTML = ""
+    basket.innerHTML = getBasketTemplate(iDish);
+}
+
+
+//HTML Templates
 function getDishTemplate(iDish, price) {
     return `<figure>
     <div>
@@ -45,10 +35,34 @@ function getDishTemplate(iDish, price) {
     </div>
     <div class="priceandbutton">
         <h4>${price}</h4>
-    <button>Add to basket</button>
+    <button onclick="addBasket(${iDish})">Add to basket</button>
 </div>
 </figure>`
 }
 
+function getEmptyBasketTemplate() {
+    return ` <div class="basket">
+                <h5>Your Basket</h5>
+            
+            <div class="description">
+            <p>
+                Nothing here yet.<br>
+                Go ahead and choose something delicious!
+            </p>
+            <button onclick="openBasket();"><img src="./img/shopping_cart.png" alt="shopping cart icon"></button>
+            </div>`
+}
 
-
+function getBasketTemplate(iDish) {
+    return `
+    <div class="basket">
+    <h5>Your Basket</h5>
+    <figure>
+    <h6>${myDishes[iDish].name}</h6>
+    <div>
+    <img src="" alt="">
+    
+    </div>
+    </figure>
+    </div>`
+}
