@@ -24,15 +24,30 @@ function renderBasket(iDish) {
     }
 }
 
+//adds amount
 function addAmount(iDish) {
-    amountRef = document.getElementById("amount");
-    if (amountRef.innerHTML < 20) {
-        amountRef.innerHTML = myDishes[iDish].amount++;
-    }
+    let amountRef = document.getElementById("amount" + iDish);
+    let amountInTitleRef = document.getElementById("amountInTitle" + iDish);
+
+    if (myBasketDishes.amount[iDish] < 20) {
+        myBasketDishes.amount[iDish]++
+        amountInTitleRef.innerHTML = amountRef.innerHTML;
+        renderBasket();}
+}
+
+//reduces Amount
+function reduceAmount(iBasket) {
+    let amountRef = document.getElementById("amount" + iBasket);
+    let amountInTitleRef = document.getElementById("amountInTitle" + iBasket);
+        if (myBasketDishes.amount[iBasket] > 1) {
+        myBasketDishes.amount[iBasket]--
+        amountInTitleRef.innerHTML = amountRef.innerHTML;
+        renderBasket();}
 }
 
 function addDish(dishTitle, iDish) {
     myBasketDishes.dishTitles.push(dishTitle);
+    myBasketDishes.amount.push(1);
 
     renderBasket();
 
@@ -46,6 +61,7 @@ function addDish(dishTitle, iDish) {
     let addhiddenButtonText = document.getElementById('hiddenButtonText' + [iDish]);
     addhiddenButtonText.classList.remove("displaynone");
     addhiddenButtonText.classList.add("orange");
+
 }
 
 //HTML Templates
@@ -66,13 +82,12 @@ function getDishTemplate(iDish, price) {
 function getBasketDishesTemplate(iBasket) {
     return `    
     <div id="dish${iBasket}" class="basketDish">
-    <h6>${myBasketDishes.dishTitles[iBasket]}</h6>
+    <h6><span id="amountInTitle${iBasket}">${myBasketDishes.amount[iBasket]}</span>x ${myBasketDishes.dishTitles[iBasket]}</h6>
     <div>
-    <p id="amount">${myDishes[iBasket].amount}</p>
+    <p><button id="reduceAmount${iBasket}" onclick="reduceAmount(${iBasket});">-</button><span id="amount${iBasket}">${myBasketDishes.amount[iBasket]}</span><button onclick="addAmount(${iBasket});">+</button></p>
     <img src="" alt="">
     </div>
     </div>`
-
 }
 
 function getEmptyBasketTemplate() {
