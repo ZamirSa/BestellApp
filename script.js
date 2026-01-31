@@ -1,104 +1,135 @@
-//render dishes
+//pushes a number in array myBasketDishes.amount for each dish
+function pushAmount() {
+    for (let iDish = 0; iDish < myDishes.length; iDish++) {
+        myBasketDishes.amount.push(0);
+    }
+}
+
+//renders all dishes
 function renderDishes() {
     let dishesContentRef = document.getElementById('burgers');
     dishesContentRef.innerHTML = "";
 
     for (let iDish = 0; iDish < myDishes.length; iDish++) {
         let price = myDishes[iDish].price.toFixed(2) + " €";
-        dishesContentRef.innerHTML += getDishTemplate(iDish, price);
+        let finalPrice = price.replaceAll(".", ",");
+        dishesContentRef.innerHTML += getDishTemplate(iDish, finalPrice);
     }
 }
 
-//openBasket
-function openBasket() {
-    let basket = document.getElementById("basket");
+//gets basketbuttons adds and removes the right class
+function getBasketButton(iDish) {
+    let addToBasketButton = document.getElementById('AddToBasketButton' + iDish);
+    addToBasketButton.classList.add("displaynone");
+
+    let addedButton = document.getElementById('AddedButton' + iDish);
+    addedButton.classList.remove("displaynone");
+    addedButton.classList.add("orange");
+    addedButton.innerHTML = `${myBasketDishes.amount[iDish]} Added`;
+
+    let plusButton = document.getElementById('plusButton' + iDish);
+    plusButton.classList.remove("displaynone");
+    plusButton.classList.add("orange");
+    plusButton.innerHTML = "+";
 }
 
-//adds dishes to the basket
-function renderBasket(iDish) {
+//renders dish to the basket
+function renderBasketDish(iDish) {
     let basketContentRef = document.getElementById("dishes");
-    basketContentRef.innerHTML = "";
+    basketContentRef.innerHTML += "";
+    let price = myDishes[iDish].price.toFixed(2) + " €";
+    let finalPrice = price.replaceAll(".", ",");
+    myBasketDishes.amount[iDish] = 1;
 
-    for (let iBasket = 0; iBasket < myBasketDishes.dishTitles.length; iBasket++) {
-        basketContentRef.innerHTML += getBasketDishesTemplate(iBasket);
-    }
+    getBasketButton(iDish);
+
+    basketContentRef.innerHTML += getBasketDishesTemplate(iDish, finalPrice);
 }
 
-//adds amount
-function addAmount(iDish) {
-    let amountRef = document.getElementById("amount" + iDish);
-    let amountInTitleRef = document.getElementById("amountInTitle" + iDish);
+//multiplies the price of the dish and the amount
+function getPrice(iDish) {
+    let priceRef = document.getElementById("price" + iDish);
+    let priceAmount = myDishes[iDish].price * myBasketDishes.amount[iDish];
+    let price = priceAmount.toFixed(2) + " €";
+    let finalPrice = price.replaceAll(".", ",");
+    priceRef.innerHTML = finalPrice;
+}
 
+//add amount
+function addAmount(iDish) {
     if (myBasketDishes.amount[iDish] < 20) {
-        myBasketDishes.amount[iDish]++
-        amountInTitleRef.innerHTML = amountRef.innerHTML;
-        renderBasket();}
+        myBasketDishes.amount[iDish]++;
+
+        let amountRef = document.getElementById("amount" + iDish);
+        amountRef.innerHTML = `${myBasketDishes.amount[iDish]}`
+        let amountInTitleRef = document.getElementById("amountInTitle" + iDish);
+        amountInTitleRef.innerHTML = `${myBasketDishes.amount[iDish]}x ${myDishes[iDish].name}`;
+
+        getPrice(iDish);
+        getBasketButton(iDish);
+
+        let basketDishRef = document.getElementById("dish" + iDish);
+        basketDishRef.classList.remove("displaynone");
+
+    } if (myBasketDishes.amount[iDish] > 1) {
+        let reduceAmountRef = document.getElementById("reduceAmount" + iDish);
+        reduceAmountRef.innerHTML = "-";
+        let trashRef = document.getElementById("trash" + iDish);
+        trashRef.innerHTML = `<button onclick="deleteBasket(${iDish});"><img src="./img/trash.png" alt=""></button>`;
+    }
 }
 
 //reduces Amount
-function reduceAmount(iBasket) {
-    let amountRef = document.getElementById("amount" + iBasket);
-    let amountInTitleRef = document.getElementById("amountInTitle" + iBasket);
-        if (myBasketDishes.amount[iBasket] > 1) {
-        myBasketDishes.amount[iBasket]--
-        amountInTitleRef.innerHTML = amountRef.innerHTML;
-        renderBasket();}
+function reduceAmount(iDish) {
+    if (myBasketDishes.amount[iDish] > 2) {
+        myBasketDishes.amount[iDish]--;
+
+        getAmountRef(iDish);
+        getPrice(iDish);
+    } else if (myBasketDishes.amount[iDish] > 1) {
+        myBasketDishes.amount[iDish]--;
+
+        let reduceAmountRef = document.getElementById("reduceAmount" + iDish);
+        reduceAmountRef.innerHTML = `<img src="./img/trash.png" alt="">`;
+        let trashRef = document.getElementById("trash" + iDish);
+        trashRef.innerHTML = "";
+
+        getAmountRef(iDish);
+        getPrice(iDish);
+
+    } else if (myBasketDishes.amount[iDish] > 0) {
+        deleteBasketDish(iDish);
+    }
 }
 
-function addDish(dishTitle, iDish) {
-    myBasketDishes.dishTitles.push(dishTitle);
-    myBasketDishes.amount.push(1);
+//returns the reduced amount in the basketdish
+function getAmountRef(iDish) {
+    let addedButtonRef = document.getElementById("AddedButton" + iDish);
+    addedButtonRef.innerHTML = `${myBasketDishes.amount[iDish]} Added`;
 
-    renderBasket();
+    let amountRef = document.getElementById("amount" + iDish);
+    amountRef.innerHTML = `${myBasketDishes.amount[iDish]}`
 
-    let addDishButton = document.getElementById('dishButton' + [iDish]);
-    addDishButton.classList.add("displaynone");
-
-    let addhiddenButton = document.getElementById('hiddenButton' + [iDish]);
-    addhiddenButton.classList.remove("displaynone");
-    addhiddenButton.classList.add("orange");
-
-    let addhiddenButtonText = document.getElementById('hiddenButtonText' + [iDish]);
-    addhiddenButtonText.classList.remove("displaynone");
-    addhiddenButtonText.classList.add("orange");
-
+    let amountInTitleRef = document.getElementById("amountInTitle" + iDish);
+    amountInTitleRef.innerHTML = `${myBasketDishes.amount[iDish]}x ${myDishes[iDish].name}`;
 }
 
-//HTML Templates
-function getDishTemplate(iDish, price) {
-    return `<figure>
-    <div>
-    <img src="./img/${myDishes[iDish].image}" alt="">
-     <span><h4>${myDishes[iDish].name}</h4>
-    <figcaption>${myDishes[iDish].description}</figcaption></span>
-    </div>
-    <div class="priceandbutton">
-        <h4>${price}</h4>
-    <div><button id="dishButton${iDish}" onclick="addDish('${myDishes[iDish].name}', '${iDish}');">Add to basket</button><button id="hiddenButtonText${iDish}" class="displaynone">Added</button><button onclick="addAmount(${iDish});" id="hiddenButton${iDish}" class="displaynone">+</button></div>
-</div>
-</figure>`
-}
+//deletes basketdish
+function deleteBasketDish(iDish) {
+    myBasketDishes.amount[iDish] = 0;
+    let basketDishRef = document.getElementById("dish" + iDish);
+    basketDishRef.classList.add("displaynone");
 
-function getBasketDishesTemplate(iBasket) {
-    return `    
-    <div id="dish${iBasket}" class="basketDish">
-    <h6><span id="amountInTitle${iBasket}">${myBasketDishes.amount[iBasket]}</span>x ${myBasketDishes.dishTitles[iBasket]}</h6>
-    <div>
-    <p><button id="reduceAmount${iBasket}" onclick="reduceAmount(${iBasket});">-</button><span id="amount${iBasket}">${myBasketDishes.amount[iBasket]}</span><button onclick="addAmount(${iBasket});">+</button></p>
-    <img src="" alt="">
-    </div>
-    </div>`
-}
+    let addedButtonRef = document.getElementById("AddedButton" + iDish);
+    addedButtonRef.innerHTML = `Add to basket`;
+    addedButtonRef.classList.add("displaynone");
 
-function getEmptyBasketTemplate() {
-    return ` <div class="basket">
-                <h5>Your Basket</h5>
-            
-            <div class="description">
-            <p>
-                Nothing here yet.<br>
-                Go ahead and choose something delicious!
-            </p>
-            <button onclick="openBasket();"><img src="./img/shopping_cart.png" alt="shopping cart icon"></button>
-            </div>`
+    let plusButtonRef = document.getElementById("plusButton" + iDish);
+    plusButtonRef.classList.remove("orange");
+    plusButtonRef.innerHTML = "Add to basket";
+
+    let amountRef = document.getElementById("amount" + iDish);
+    amountRef.innerHTML = `${myBasketDishes.amount[iDish]}`
+    let amountInTitleRef = document.getElementById("amountInTitle" + iDish);
+    amountInTitleRef.innerHTML = `${myBasketDishes.amount[iDish]}`;
 }

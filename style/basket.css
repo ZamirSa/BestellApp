@@ -27,7 +27,7 @@
     gap: 60px;
 }
 
-.basket figure {
+.basket article {
     display: flex;
     flex-direction: column;
     gap: 15px;
@@ -36,17 +36,19 @@
 .basketDish {
     background-color: rgba(250, 202, 172, 1);
     color: rgb(54, 53, 52);
+    width: 380px;
     padding: 20px;
     border-radius: 20px;
     gap: 15px;
     display: flex;
-    align-items: center;
     justify-content: center;
     flex-direction: column;
+    margin: 0;
 }
 
 .basketDish div {
     display: flex;
+    width: 100%;
     justify-content: space-between;
 }
 
@@ -68,6 +70,22 @@
 h6 {
     margin: 0;
     font-size: 22px;
+    display: flex;
+}
+
+.basketDishTitle {
+    width: 80%;
+    display: flex;
+}
+
+.trash {
+    width: 20%;
+    display: flex;
+    justify-content: end;
+}
+
+.trash button {
+    display: flex;
 }
 
 h5 {
@@ -82,7 +100,8 @@ h5 {
 }
 
 .basket img {
-    width: 128px;
+    width: 24px;
+    height: 24px;
 }
 
 .basket button {
@@ -90,6 +109,7 @@ h5 {
     border: none;
     cursor: pointer;
 }
+
 
 .description {
     display: flex;

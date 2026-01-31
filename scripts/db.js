@@ -26,6 +26,5 @@ let myDishes = [
 ];
 
 let myBasketDishes = {
-    'dishTitles': [],
     'amount': []
 };

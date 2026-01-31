@@ -10,7 +10,7 @@
     <title>BestellApp</title>
 </head>
 
-<body onload="renderDishes();">
+<body onload="pushAmount(); renderDishes();">
 
     <!--header-->
     <header>
@@ -74,12 +74,11 @@
 
         <!--basket-->
         <section class="basketsection">
-
             <div class="basket" id="basket">
                 <h5>Your Basket</h5>
-                <figure id="dishes">
+                <article id="dishes">
 
-                </figure>
+                </article>
             </div>
         </section>
     </main>
@@ -92,6 +91,7 @@
     </footer>
 
     <script src="./script.js"></script>
+    <script src="./scripts/templates.js"></script>
     <script src="./scripts/db.js"></script>
 
 </body>

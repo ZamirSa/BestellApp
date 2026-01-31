@@ -1,10 +1,10 @@
 /*dishes*/
-article {
+.dishsections article {
     align-self: center;
     max-width: 1920px;
 }
 
-article figure {
+.dishsections figure {
     align-self: flex-start;
     display: flex;
     justify-content: space-between;
@@ -15,11 +15,11 @@ article figure {
     padding: 15px;
 }
 
-article figure img {
+.dishsections article figure img {
     width: 200px;
 }
 
-article div {
+.dishsections article div {
     display: flex;
     gap: 15px;
 }
@@ -29,11 +29,11 @@ h4 {
     margin: 0;
 }
 
-article figcaption {
+.dishsections figcaption {
     font-size: 16px;
 }
 
-article figure button {
+.priceandbutton button {
     background-color: white;
     border: none;
     padding: 10px;
@@ -51,11 +51,11 @@ article figure button {
     justify-content: space-between;
 }
 
-article figure button:hover {
+.dishsections article figure button:hover {
     color: rgba(231, 108, 31, 1);
     box-shadow: 0 6px 8px 0 rgba(0, 0, 0, 0.2);
 }
 
 .orange {
-    color: rgba(231, 108, 31, 1);
+    color: rgba(231, 108, 31, 1)!important;
 }
