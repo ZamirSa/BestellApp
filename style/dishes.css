@@ -1,22 +1,23 @@
 /*dishes*/
 .dishsections article {
     align-self: center;
+    padding-right: 800px;
     max-width: 1920px;
 }
 
 .dishsections figure {
-    align-self: flex-start;
     display: flex;
     justify-content: space-between;
     background-color: rgba(253, 234, 220, 1);
     border-radius: 12px;
     gap: 30px;
-    width: 825px;
+    width: 110%;
     padding: 15px;
 }
 
 .dishsections article figure img {
     width: 200px;
+    border-radius: 10px;
 }
 
 .dishsections article div {
@@ -39,9 +40,15 @@ h4 {
     padding: 10px;
     font-size: 16px;
     border-radius: 20px;
+    text-align: center;
     color: black;
     font-weight: 600;
     z-index: 100;
+    width: 130px;
+}
+
+.widthunset {
+    width: unset !important;
 }
 
 .priceandbutton {
@@ -49,6 +56,7 @@ h4 {
     flex-direction: column;
     align-items: flex-end;
     justify-content: space-between;
+    width: 30%;
 }
 
 .dishsections article figure button:hover {
@@ -57,5 +65,90 @@ h4 {
 }
 
 .orange {
-    color: rgba(231, 108, 31, 1)!important;
+    color: rgba(231, 108, 31, 1) !important;
+}
+
+/*media*/
+@media (max-width: 1470px) {
+    .dishsections article {
+        max-width: 1440px;
+        padding-right: 40%;
+    }
+
+    .dishsections figure {
+        width: 100%;
+    }
+
+    .dishsections article figure img {
+        width: 180px;
+    }
+
+    .dishsections article div {
+        gap: 10px;
+    }
+
+    h4 {
+        font-size: 20px;
+    }
+
+    .dishsections figcaption {
+        font-size: 14px;
+    }
+
+    .priceandbutton button {
+        padding: 10px;
+        font-size: 14px;
+        border-radius: 15px;
+    }
+}
+
+@media (max-width: 1230px) {
+
+    .dishsections article {
+        max-width: 1230px;
+        width: 90%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+        padding: 20px;
+    }
+
+    .dishsections figure {
+        margin: 0;
+    }
+}
+
+@media (max-width: 640px) {
+
+    .dishsections figure {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .dishsections article {
+        max-width: 640px;
+        width: 80%;
+    }
+
+    .dishsections article div {
+        flex-direction: column;
+    }
+
+    .priceandbutton {
+        flex-direction: row !important;
+        width: 100%;
+    }
+
+    .priceandbutton div {
+        flex-direction: row !important;
+    }
+
+    .dishsections article figure img {
+        width: 100%;
+        height: 100px;
+        border-radius: 12px;
+        align-self: center;
+        object-fit: cover;
+    }
 }

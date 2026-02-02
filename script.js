@@ -2,6 +2,7 @@
 function pushAmount() {
     for (let iDish = 0; iDish < myDishes.length; iDish++) {
         myBasketDishes.amount.push(0);
+        myBasketDishes.price.push(0);
     }
 }
 
@@ -41,18 +42,38 @@ function renderBasketDish(iDish) {
     let finalPrice = price.replaceAll(".", ",");
     myBasketDishes.amount[iDish] = 1;
 
+    myBasketDishes.price[iDish] = myDishes[iDish].price;
+    let subtotalnumber = myBasketDishes.subtotal += myBasketDishes.price[iDish];
+    let subtotalnumberfixed = subtotalnumber.toFixed(2) + " €";
+    let subtotal = subtotalnumberfixed.replaceAll(".", ",");
+
+    let totalnumber = subtotalnumber + 4.99;
+    let totalfixed = totalnumber.toFixed(2) + " €";
+    let total = totalfixed.replaceAll(".", ",");
+
     getBasketButton(iDish);
+    allDishPrice(iDish, subtotal, total);
+    getEmptyBasket();
 
     basketContentRef.innerHTML += getBasketDishesTemplate(iDish, finalPrice);
 }
 
 //multiplies the price of the dish and the amount
-function getPrice(iDish) {
+function getPrice(iDish, subtotalnumber) {
     let priceRef = document.getElementById("price" + iDish);
-    let priceAmount = myDishes[iDish].price * myBasketDishes.amount[iDish];
+    let priceAmount = myBasketDishes.price[iDish] * myBasketDishes.amount[iDish];
     let price = priceAmount.toFixed(2) + " €";
     let finalPrice = price.replaceAll(".", ",");
     priceRef.innerHTML = finalPrice;
+
+    let subtotalnumberfixed = subtotalnumber.toFixed(2) + " €";
+    let subtotal = subtotalnumberfixed.replaceAll(".", ",");
+
+    let totalnumber = subtotalnumber + 4.99;
+    let totalfixed = totalnumber.toFixed(2) + " €";
+    let total = totalfixed.replaceAll(".", ",");
+
+    allDishPrice(iDish, subtotal, total);
 }
 
 //add amount
@@ -64,9 +85,11 @@ function addAmount(iDish) {
         amountRef.innerHTML = `${myBasketDishes.amount[iDish]}`
         let amountInTitleRef = document.getElementById("amountInTitle" + iDish);
         amountInTitleRef.innerHTML = `${myBasketDishes.amount[iDish]}x ${myDishes[iDish].name}`;
+        let subtotalnumber = myBasketDishes.subtotal += myBasketDishes.price[iDish];
 
-        getPrice(iDish);
+        getPrice(iDish, subtotalnumber);
         getBasketButton(iDish);
+        getEmptyBasket();
 
         let basketDishRef = document.getElementById("dish" + iDish);
         basketDishRef.classList.remove("displaynone");
@@ -75,7 +98,7 @@ function addAmount(iDish) {
         let reduceAmountRef = document.getElementById("reduceAmount" + iDish);
         reduceAmountRef.innerHTML = "-";
         let trashRef = document.getElementById("trash" + iDish);
-        trashRef.innerHTML = `<button onclick="deleteBasket(${iDish});"><img src="./img/trash.png" alt=""></button>`;
+        trashRef.innerHTML = `<button onclick="deleteBasketDish(${iDish});"><img src="./img/trash.png" alt=""></button>`;
     }
 }
 
@@ -83,19 +106,20 @@ function addAmount(iDish) {
 function reduceAmount(iDish) {
     if (myBasketDishes.amount[iDish] > 2) {
         myBasketDishes.amount[iDish]--;
+        let subtotalnumber = myBasketDishes.subtotal -= myBasketDishes.price[iDish];
 
         getAmountRef(iDish);
-        getPrice(iDish);
+        getPrice(iDish, subtotalnumber);
     } else if (myBasketDishes.amount[iDish] > 1) {
         myBasketDishes.amount[iDish]--;
-
+        let subtotalnumber = myBasketDishes.subtotal -= myBasketDishes.price[iDish];
         let reduceAmountRef = document.getElementById("reduceAmount" + iDish);
         reduceAmountRef.innerHTML = `<img src="./img/trash.png" alt="">`;
         let trashRef = document.getElementById("trash" + iDish);
         trashRef.innerHTML = "";
 
         getAmountRef(iDish);
-        getPrice(iDish);
+        getPrice(iDish, subtotalnumber);
 
     } else if (myBasketDishes.amount[iDish] > 0) {
         deleteBasketDish(iDish);
@@ -116,6 +140,10 @@ function getAmountRef(iDish) {
 
 //deletes basketdish
 function deleteBasketDish(iDish) {
+    let subtotalnumber = myBasketDishes.subtotal -= myBasketDishes.price[iDish] * myBasketDishes.amount[iDish];
+    getPrice(iDish, subtotalnumber);
+    getEmptyBasket();
+
     myBasketDishes.amount[iDish] = 0;
     let basketDishRef = document.getElementById("dish" + iDish);
     basketDishRef.classList.add("displaynone");
@@ -132,4 +160,72 @@ function deleteBasketDish(iDish) {
     amountRef.innerHTML = `${myBasketDishes.amount[iDish]}`
     let amountInTitleRef = document.getElementById("amountInTitle" + iDish);
     amountInTitleRef.innerHTML = `${myBasketDishes.amount[iDish]}`;
+}
+
+//renders subtotal, total, delivery fee
+function allDishPrice(iDish, subtotal, total) {
+    let allDishPriceRef = document.getElementById("allDishPrice");
+    allDishPriceRef.innerHTML = getAllDishPriceTemplate(iDish, subtotal, total);
+
+    if (myBasketDishes.subtotal < 1) {
+        allDishPriceRef.classList.add("displaynone");
+    } else {
+        allDishPriceRef.classList.remove("displaynone");
+    }
+}
+
+//renders emptyBasket
+function getEmptyBasket() {
+    let emptyBasketRef = document.getElementById("emptyBasket");
+    if (myBasketDishes.subtotal < 1) {
+        emptyBasketRef.classList.remove("displaynone");
+    } else {
+        emptyBasketRef.classList.add("displaynone");
+    }
+}
+
+//opens confirmationmessage
+function openDialog() {
+    var element = document.getElementById("body");
+    element.classList.add("hidden")
+    dialogRef.showModal();
+    dialogRef.innerHTML = getDialogTemplate();
+
+    let basketRef = document.getElementById("basket");
+    basketRef.classList.add("displaynone");
+    burgersRef = document.getElementById("burgers");
+    burgersRef.classList.remove("displaynone");
+
+}
+
+//closes confirmationmessage
+function closeDialog() {
+    var element = document.getElementById("body");
+    element.classList.remove("hidden");
+    dialogRef.close();
+    location.reload();
+}
+
+//toggles display none on basket
+function getBasket() {
+    basketRef = document.getElementById("basket");
+    basketRef.classList.toggle("basketdisplay");
+
+    burgersRef = document.getElementById("burgers");
+    burgersRef.classList.toggle("displaynone");
+
+    bodyRef = document.getElementById("body");
+    bodyRef.classList.toggle("hidden");
+}
+
+//closes Basket
+function closeBasket() {
+    basketRef = document.getElementById("basket");
+    basketRef.classList.add("basketdisplay");
+
+    burgersRef = document.getElementById("burgers");
+    burgersRef.classList.remove("displaynone");
+
+    bodyRef = document.getElementById("body");
+    bodyRef.classList.remove("hidden");
 }

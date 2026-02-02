@@ -2,7 +2,7 @@
 .basketsection {
     width: 100%;
     max-width: 1920px;
-    height: 700px;
+    height: 790px;
     position: fixed;
     display: flex;
     justify-content: flex-end;
@@ -24,19 +24,21 @@
     align-items: center;
     color: rgb(253, 234, 220);
     font-size: 24px;
-    gap: 60px;
+    gap: 30px;
 }
 
 .basket article {
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 10px;
+    max-height: 380px;
+    overflow-y: auto;
 }
 
 .basketDish {
-    background-color: rgba(250, 202, 172, 1);
+    background-color: rgba(253, 234, 220, 1);
     color: rgb(54, 53, 52);
-    width: 380px;
+    width: 350px;
     padding: 20px;
     border-radius: 20px;
     gap: 15px;
@@ -44,6 +46,7 @@
     justify-content: center;
     flex-direction: column;
     margin: 0;
+    margin-right: 15px;
 }
 
 .basketDish div {
@@ -65,6 +68,10 @@
 
 .basketDish button img {
     width: 24px;
+}
+
+menu {
+    display: none;
 }
 
 h6 {
@@ -110,17 +117,201 @@ h5 {
     cursor: pointer;
 }
 
-
-.description {
-    display: flex;
-    flex-direction: column;
-    gap: 60px;
-}
-
 .displayflex {
     display: flex;
 }
 
 .displaynone {
-    display: none;
+    display: none !important;
+}
+
+
+/* scrollbar */
+
+.basket article::-webkit-scrollbar {
+    width: 6px;
+}
+
+/* Track */
+.basket article::-webkit-scrollbar-track {
+    border-radius: 30px;
+}
+
+/* Handle */
+.basket article::-webkit-scrollbar-thumb {
+    height: 20px;
+    background-color: rgba(250, 202, 172, 1);
+    border-radius: 10px;
+}
+
+/* Handle on hover */
+.basket article::-webkit-scrollbar-thumb:hover {
+    background: rgb(231, 195, 173);
+}
+
+
+/* subtotal, delivery fee, total */
+.basket table {
+    width: 350px;
+    margin-right: 35px;
+    color: white;
+    font-size: 20px;
+    display: flex;
+    gap: 30px;
+    flex-direction: column;
+}
+
+.basket table button {
+    background-color: rgba(231, 108, 31, 1);
+    font-size: 32px;
+    color: white;
+    font-weight: bold;
+    padding: 13px;
+    border-radius: 60px;
+    margin-bottom: 60px;
+}
+
+.basket tbody {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.basket tr {
+    display: flex;
+    justify-content: space-between;
+}
+
+.total {
+    border-top-style: solid;
+    border-color: white;
+    padding-top: 8px;
+}
+
+/* empty basket */
+.description {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 60px;
+}
+
+.description img {
+    width: 128px;
+    height: 129px;
+}
+
+@media (max-width: 1470px) {
+    
+    .basketsection {
+        max-width: 1470px;
+        top: 100px;
+    }
+
+    .basket {
+        width: 400px;
+    }
+
+    .basketDish {
+        width: 300px;
+    }
+
+    /* subtotal, delivery fee, total */
+    .basket table {
+        width: 300px;
+    }
+
+    .basket table button {
+        font-size: 28px;
+        padding: 10px;
+        border-radius: 55px;
+        margin-bottom: 55px;
+    }
+}
+
+@media (max-width: 1230px) {
+
+    /* menu */
+    menu {
+        display: flex;
+        justify-content: center;
+        gap: 60px;
+        align-items: center;
+        max-width: 1230px;
+        width: 100%;
+        position: fixed;
+        bottom: 0;
+        height: 80px;
+        margin: 0;
+        background-color: rgba(54, 53, 52, 1);
+        padding: 0;
+        z-index: 1000;
+    }
+
+    menu img {
+        width: 50px;
+        height: 52px;
+    }
+
+    menu button {
+        background: none;
+        border: none;
+        cursor: pointer;
+    }
+
+    .basketsection {
+        max-width: 1230px;
+    }
+
+    /* basket */
+    .basket {
+        width: 100%;
+        border-radius: 0;
+    }
+
+    .basketsection {
+        max-width: 1230px;
+        top: 0;
+        height: calc(100% - 80px);
+    }
+
+    h5 {
+        margin-top: 80px;
+    }
+}
+
+@media (max-width: 640px) {
+
+    /* menu */
+    menu {
+        gap: 15px;
+        max-width: 640px;
+        position: fixed;
+        z-index: 1000;
+    }
+
+    menu img {
+        width: 30px;
+        height: 30px;
+    }
+
+    /* basket */
+    .basketsection {
+        max-width: 640px;
+    }
+
+    .basketDish {
+        width: 240px;
+        margin-right: 7px;
+    }
+
+    /* subtotal, delivery fee, total */
+    .basket table {
+        width: 275px;
+        margin-right: 7px;
+    }
+
+    .basket table button {
+        font-size: 24px;
+    }
 }

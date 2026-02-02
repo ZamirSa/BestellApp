@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="com">
+<html lang="de">
 
 <head>
     <meta charset="UTF-8">
@@ -7,16 +7,17 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="./style/basket.css">
     <link rel="stylesheet" href="./style/dishes.css">
+    <link rel="shortcut icon" href="./img/favicon.png" type="image/x-icon">
     <title>BestellApp</title>
 </head>
 
-<body onload="pushAmount(); renderDishes();">
+<body onload="pushAmount(); renderDishes();" id="body">
 
     <!--header-->
     <header>
         <nav>
             <img class="headerlogo" src="./img/Logo 02.png" alt="logo of the website">
-            <button><img class="menubar" src="./img/menu.png" alt="menu bar"></button>
+            <img class="menubar" src="./img/menu.png" alt="menu bar">
         </nav>
     </header>
 
@@ -24,8 +25,9 @@
     <main>
         <!--content-->
         <section class="content">
+            
             <!--homepage-->
-            <section class="homepage">
+            <section class="homepage" id="homepage">
                 <img class="hero" src="./img/hero-bestellappwallpaper.png" alt="wallpaper image of pizza and burger">
                 <img class="logo-burger" src="./img/logo-burger.png" alt="logo with a burger icon">
                 <div class="title">
@@ -34,15 +36,15 @@
                         <img src="./img/star.png" alt="star icon"><strong>4,1</strong> (317)
                     </div>
                 </div>
-                <h3>The best of Burgers, Pizza and Greens, all in one great place.</h3>
+                <h2>The best of Burgers, Pizza and Greens, all in one great place.</h2>
             </section>
 
             <!--Burger&Sandwiches-->
             <section class="dishsections">
                 <div class="sectiontitlecontainer">
                     <span>
-                        <img src="./img/burger-icon.png" alt="">
-                        <h2>Burger & Sandwiches</h2>
+                        <img src="./img/burger-icon.png" alt="burger icon">
+                        <h3>Burger&nbsp;<span>& Sandwiches</span></h3>
                     </span>
                 </div>
                 <article id="burgers">
@@ -50,37 +52,34 @@
                 </article>
             </section>
 
-            <!--Pizza-->
-            <section class="dishsections">
-                <div class="sectiontitlecontainer">
-                    <span>
-                        <img src="./img/Pizza 1.png" alt="">
-                        <h2>Pizza (30cm)</h2>
-                    </span>
-                </div>
-            </section>
-
-            <!--Salad-->
-            <section class="dishsections">
-                <div class="sectiontitlecontainer">
-                    <span>
-                        <img src="./img/Salad 1.png" alt="">
-                        <h2>Salad</h2>
-                    </span>
-                </div>
-            </section>
-        </section>
-
-
         <!--basket-->
         <section class="basketsection">
-            <div class="basket" id="basket">
+            <div class="basketdisplay basket" id="basket">
                 <h5>Your Basket</h5>
                 <article id="dishes">
 
                 </article>
+                <div class="description" id="emptyBasket">
+                    <p>
+                        Nothing here yet.<br>
+                        Go ahead and choose something delicious!
+                    </p>
+                    <img src="./img/shopping_cart.png" alt="shopping cart icon">
+                </div>
+                <table id="allDishPrice">
+
+                </table>
             </div>
         </section>
+
+        <!--confirmation message-->
+        <dialog id="dialog"></dialog>
+        <menu>
+            <button onclick="closeBasket();" aria-label="homepage"><a href="#homepage"><img src="./img/home.png" alt="home icon"></a></button>
+            <button><img src="./img/person.png" alt="person icon"></button>
+            <button><img src="./img/takeout_dining_2.png" alt="takeout dinning icon"></button>
+            <button onclick="getBasket();"><img src="./img/shopping_cart(1).png" alt="shopping cart icon"></button>
+        </menu>
     </main>
 
     <!--footer-->
@@ -93,7 +92,6 @@
     <script src="./script.js"></script>
     <script src="./scripts/templates.js"></script>
     <script src="./scripts/db.js"></script>
-
 </body>
 
 </html>

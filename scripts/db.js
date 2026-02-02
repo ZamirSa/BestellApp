@@ -1,3 +1,5 @@
+const dialogRef = document.getElementById("dialog");
+
 let myDishes = [
     {
         "name": "Veggie mushroom black burger",
@@ -22,9 +24,18 @@ let myDishes = [
         "price": 15.90,
         "description": "Chicken, Cheese, Tomatoes, Lettuce, Onion, Bell pepper",
         "image": "BigChickenBurger.png",
+    },
+        {
+        "name": "classic hamburger",
+        "price": 13.90,
+        "description": "Beef, Tomatoes, Cheese, Salad",
+        "image": "hamburger.jpg",
     }
 ];
 
 let myBasketDishes = {
-    'amount': []
+    'amount': [],
+    'price': [],
+    'subtotal': 0,
+    'total': []
 };

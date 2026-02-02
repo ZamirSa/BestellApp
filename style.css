@@ -11,6 +11,10 @@ body {
     font-size: 18px;
 }
 
+.hidden {
+    overflow: hidden;
+}
+
 
 /*header*/
 header {
@@ -23,8 +27,8 @@ header {
 }
 
 nav {
-    max-width: 1920px;
-    min-width: 1600px;
+    max-width: 1700px;
+    width: 90%;
     margin-right: 60px;
     padding-left: 60px;
     display: flex;
@@ -63,7 +67,7 @@ main {
     flex-direction: column;
 }
 
-/*homepage*/ 
+/*homepage*/
 .homepage {
     display: flex;
     flex-direction: column;
@@ -71,12 +75,12 @@ main {
     width: 100%;
     max-width: 1920px;
     gap: 15px;
-    padding-bottom: 80px;
+    padding-bottom: 15px;
 }
 
 .hero {
     width: 100%;
-    height: 500px;
+    height: 70%;
     object-fit: cover;
 }
 
@@ -121,15 +125,15 @@ strong {
     font-size: 20px;
 }
 
-h3 {
+h2 {
     font-size: 24px;
     margin: 0;
 }
 
-/*dishsections*/ 
+/*dishsections*/
 .dishsections {
     width: 100%;
-    padding-bottom: 80px;
+    padding-bottom: 60px;
     display: flex;
     flex-direction: column;
 }
@@ -137,6 +141,7 @@ h3 {
 .sectiontitlecontainer {
     display: flex;
     justify-content: center;
+    padding-right: 600px;
     height: 60px;
     background-color: rgba(231, 108, 31, 1);
 }
@@ -146,12 +151,15 @@ h3 {
     margin-top: -27px;
 }
 
-h2 {
+h3 {
     margin: 0;
     align-self: center;
     color: white;
     font-size: 40px;
+    display: flex;
+    flex-direction: row;
 }
+
 
 .sectiontitlecontainer span {
     display: flex;
@@ -160,7 +168,7 @@ h2 {
 }
 
 
-/*footer*/ 
+/*footer*/
 footer {
     background-color: rgba(231, 108, 31, 1);
     height: 100px;
@@ -171,4 +179,264 @@ footer {
     gap: 60px;
     color: white;
     padding-top: 28px;
+}
+
+
+/*dialog*/
+dialog[open] {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgba(54, 53, 52, 1);
+    color: rgba(253, 234, 220, 1);
+    font-size: 29px;
+    gap: 15px;
+    border: none;
+    text-align: center;
+    border-radius: 30px;
+    padding: 40px;
+}
+
+dialog h2 {
+    color: rgba(253, 234, 220, 1);
+    font-size: 42px;
+}
+
+dialog p {
+    margin: 0;
+}
+
+dialog img {
+    width: 80px;
+}
+
+dialog button {
+    background: none;
+    border: none;
+    padding-block: 0;
+    padding-inline: 0;
+    align-self: flex-end;
+    cursor: pointer;
+}
+
+dialog button img {
+    width: 16px;
+}
+
+dialog::backdrop {
+    background-color: rgba(0, 0, 0, 0.548);
+}
+
+/*media*/
+@media (max-width: 1470px) {
+
+    /*Header*/
+    header {
+        height: 100px;
+    }
+
+    nav {
+        max-width: 1440px;
+    }
+
+    .headerlogo {
+        width: 80px;
+    }
+
+    .menubar {
+        width: 40px;
+    }
+
+    /*main*/
+
+    /*homepage*/
+    .homepage {
+        max-width: 1470px;
+        padding-bottom: 30px;
+    }
+
+    .logo-burger {
+        width: 160px;
+    }
+
+    h1 {
+        font-size: 40px;
+    }
+
+    .title {
+        gap: 15px;
+    }
+
+    .reviewcontainer {
+        height: 30px;
+        padding: 5px;
+        gap: 5px;
+    }
+
+    .reviewcontainer img {
+        width: 20px;
+        height: 19px;
+    }
+
+    strong {
+        font-size: 18px;
+    }
+
+    h2 {
+        font-size: 20px;
+        margin: 0;
+    }
+
+    /*dishsections*/
+    .sectiontitlecontainer span {
+        gap: 15px;
+        max-width: 1440px;
+    }
+
+    /*footer*/
+    footer {
+        height: 80px;
+        margin-bottom: 80px;
+    }
+}
+
+
+@media (max-width: 1230px) {
+    .basketdisplay {
+        display: none !important;
+    }
+
+    /*header*/
+    nav {
+        max-width: 1230px;
+    }
+
+    /*main*/
+    .homepage {
+        max-width: 1230px;
+        padding-bottom: 60px;
+    }
+
+    .sectiontitlecontainer {
+        padding-right: 0;
+    }
+
+    .sectiontitlecontainer span {
+        max-width: 1230px;
+    }
+}
+
+
+@media (max-width: 640px) {
+
+    /*Header*/
+    header {
+        height: 80px;
+    }
+
+    nav {
+        max-width: 640px;
+    }
+
+    .headerlogo {
+        width: 80px;
+    }
+
+    nav button {
+        display: none;
+    }
+
+    /*main*/
+
+    /*homepage*/
+    .homepage {
+        max-width: 640px;
+        padding-bottom: 60px;
+    }
+
+    .hero {
+        width: 90%;
+        height: 320px;
+        border-radius: 15px;
+        margin-top: 15px;
+    }
+
+    .logo-burger {
+        width: 130px;
+        margin-top: -85px;
+    }
+
+    .title {
+        flex-direction: column-reverse;
+    }
+
+    .reviewcontainer {
+        height: 25px;
+        padding: 5px;
+        gap: 5px;
+    }
+
+    .reviewcontainer img {
+        width: 20px;
+        height: 19px;
+    }
+
+    strong {
+        font-size: 20px;
+    }
+
+    h2 {
+        font-size: 20px;
+        padding-right: 15px;
+        padding-left: 15px;
+        text-align: center;
+
+    }
+
+
+    /*dishsections*/
+    .sectiontitlecontainer span {
+        gap: 0;
+        max-width: 640px;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .sectiontitlecontainer img {
+        width: 58px;
+        height: 60px;
+        margin-top: -45px;
+    }
+
+    h3 span {
+        display: none !important;
+    }
+
+    h3 {
+        margin-block: 0;
+        align-self: unset;
+        font-size: 32px;
+    }
+
+    /*footer*/
+    footer {
+        flex-direction: column;
+        gap: 10px;
+        padding: 0;
+        height: 128px;
+    }
+
+    footer p {
+        margin: 0;
+    }
+
+    /*dialog*/
+    dialog[open] {
+        font-size: 24px;
+        width: 220px;
+    }
+
+    dialog h2 {
+        font-size: 38px;
+    }
 }
