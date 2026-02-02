@@ -217,6 +217,11 @@ dialog button {
     padding-inline: 0;
     align-self: flex-end;
     cursor: pointer;
+    transition: all 0.3s;
+}
+
+dialog button:hover {
+    scale: 1.1;
 }
 
 dialog button img {
@@ -296,7 +301,6 @@ dialog::backdrop {
     /*footer*/
     footer {
         height: 80px;
-        margin-bottom: 80px;
     }
 }
 
@@ -324,6 +328,11 @@ dialog::backdrop {
     .sectiontitlecontainer span {
         max-width: 1230px;
     }
+
+    /*footer*/
+    footer {
+        margin-bottom: 80px;
+    }
 }
 
 
@@ -342,7 +351,7 @@ dialog::backdrop {
         width: 80px;
     }
 
-    nav button {
+    .menubar {
         display: none;
     }
 

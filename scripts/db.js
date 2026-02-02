@@ -25,8 +25,8 @@ let myDishes = [
         "description": "Chicken, Cheese, Tomatoes, Lettuce, Onion, Bell pepper",
         "image": "BigChickenBurger.png",
     },
-        {
-        "name": "classic hamburger",
+    {
+        "name": "Classic hamburger",
         "price": 13.90,
         "description": "Beef, Tomatoes, Cheese, Salad",
         "image": "hamburger.jpg",

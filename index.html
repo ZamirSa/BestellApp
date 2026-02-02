@@ -25,7 +25,7 @@
     <main>
         <!--content-->
         <section class="content">
-            
+
             <!--homepage-->
             <section class="homepage" id="homepage">
                 <img class="hero" src="./img/hero-bestellappwallpaper.png" alt="wallpaper image of pizza and burger">
@@ -40,7 +40,7 @@
             </section>
 
             <!--Burger&Sandwiches-->
-            <section class="dishsections">
+            <section class="dishsections" id="dishsection">
                 <div class="sectiontitlecontainer">
                     <span>
                         <img src="./img/burger-icon.png" alt="burger icon">
@@ -52,34 +52,41 @@
                 </article>
             </section>
 
-        <!--basket-->
-        <section class="basketsection">
-            <div class="basketdisplay basket" id="basket">
-                <h5>Your Basket</h5>
-                <article id="dishes">
+            <!--basket-->
+            <section class="basketsection">
+                <div class="basketdisplay basket" id="basket">
+                    <h5>Your Basket</h5>
+                    <article id="dishes">
 
-                </article>
-                <div class="description" id="emptyBasket">
-                    <p>
-                        Nothing here yet.<br>
-                        Go ahead and choose something delicious!
-                    </p>
-                    <img src="./img/shopping_cart.png" alt="shopping cart icon">
+                    </article>
+                    <div class="description" id="emptyBasket">
+                        <p>
+                            Nothing here yet.<br>
+                            Go ahead and choose something delicious!
+                        </p>
+                        <img src="./img/shopping_cart.png" alt="shopping cart icon">
+                    </div>
+                    <table id="allDishPrice">
+
+                    </table>
                 </div>
-                <table id="allDishPrice">
+            </section>
 
-                </table>
-            </div>
-        </section>
-
-        <!--confirmation message-->
-        <dialog id="dialog"></dialog>
-        <menu>
-            <button onclick="closeBasket();" aria-label="homepage"><a href="#homepage"><img src="./img/home.png" alt="home icon"></a></button>
-            <button><img src="./img/person.png" alt="person icon"></button>
-            <button><img src="./img/takeout_dining_2.png" alt="takeout dinning icon"></button>
-            <button onclick="getBasket();"><img src="./img/shopping_cart(1).png" alt="shopping cart icon"></button>
-        </menu>
+            <!--confirmation message-->
+            <dialog id="dialog"></dialog>
+            <menu>
+                <button onclick="closeBasket();" aria-label="homepage"><a href="#homepage"><img src="./img/home.png"
+                            alt="home icon" onmouseover="this.src='./img/active.png'"
+                            onmouseleave="this.src='./img/home.png'"></a></button>
+                <button><a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank"><img src="./img/person.png" alt="person icon" onmouseover="this.src='./img/acdtive.png'"
+                        onmouseleave="this.src='./img/person.png'"></a></button>
+                <button onclick="closeBasket();"><a href="#dishsection"><img src="./img/takeout_dining_2.png" alt="takeout dinning icon"
+                        onmouseover="this.src='./img/favicon.png'"
+                        onmouseleave="this.src='./img/takeout_dining_2.png'"></a></button>
+                <button onclick="getBasket();"><img src="./img/shopping_cart(1).png" alt="shopping cart icon"
+                        onmouseover="this.src='./img/activeshoppingcart.png'"
+                        onmouseleave="this.src='./img/shopping_cart(1).png'"></button>
+            </menu>
     </main>
 
     <!--footer-->

@@ -1,4 +1,6 @@
 //HTML Templates
+
+//Dish Template
 function getDishTemplate(iDish, finalPrice) {
     return `
     <figure>
@@ -20,6 +22,7 @@ function getDishTemplate(iDish, finalPrice) {
 </figure>`
 }
 
+//Basketdish Template
 function getBasketDishesTemplate(iDish, finalPrice) {
     return `    
     <figure id="dish${iDish}" class="basketDish">
@@ -29,7 +32,7 @@ function getBasketDishesTemplate(iDish, finalPrice) {
         </h6>
         <div>
             <p>
-            <button id="reduceAmount${iDish}" onclick="reduceAmount(${iDish});"><img src="./img/trash.png" alt="trash icon"></button>
+            <button id="reduceAmount${iDish}" onclick="reduceAmount(${iDish});"><img src="./img/trash.png" alt="trash icon" onmouseover="this.src='./img/press.png'" onmouseleave="this.src='./img/trash.png'"></button>
             <span id="amount${iDish}">${myBasketDishes.amount[iDish]}</span>
             <button onclick="addAmount(${iDish});">+</button>
             </p>
@@ -38,7 +41,8 @@ function getBasketDishesTemplate(iDish, finalPrice) {
     </figure>`
 }
 
-function getAllDishPriceTemplate(iDish, subtotal, total) {
+//Subtotal and Total Template
+function getAllDishPriceTemplate(subtotal, total) {
     return `  
     <tr>
         <td>Subtotal</td>
@@ -55,6 +59,7 @@ function getAllDishPriceTemplate(iDish, subtotal, total) {
     <button onclick="openDialog(); setTimeout(closeDialog, 2500)">Buy now (${total})</button>`
 }
 
+//confirmationmessage Template
 function getDialogTemplate() {
     return `
         <button onclick="closeDialog();"><img src="./img/close.png" alt="close icon"></button>
