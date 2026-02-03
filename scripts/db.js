@@ -37,5 +37,6 @@ let myBasketDishes = {
     'amount': [],
     'price': [],
     'subtotal': 0,
-    'total': []
+    'total': [],
+    'totalamount': 0
 };

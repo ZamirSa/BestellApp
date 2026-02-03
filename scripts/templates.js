@@ -15,7 +15,7 @@ function getDishTemplate(iDish, finalPrice) {
             <h4>${finalPrice}</h4>
             <div>
                 <button id="AddToBasketButton${iDish}" onclick="renderBasketDish(${iDish});">Add to basket</button>
-                <button id="AddedButton${iDish}" class="displaynone widthunset">${myBasketDishes.amount[iDish]} Added</button>
+                <button id="AddedButton${iDish}" class="displaynone widthunset amountbutton">${myBasketDishes.amount[iDish]} Added</button>
                 <button id="plusButton${iDish}" onclick="addAmount(${iDish});"class="displaynone widthunset">+</button>
             </div>
         </div>
@@ -56,7 +56,7 @@ function getAllDishPriceTemplate(subtotal, total) {
         <th>Total</th>
         <th>${total}</th>
     </tr>
-    <button onclick="openDialog(); setTimeout(closeDialog, 2500)">Buy now (${total})</button>`
+    <button onclick="openDialog();">Buy now (${total})</button>`
 }
 
 //confirmationmessage Template
@@ -67,4 +67,38 @@ function getDialogTemplate() {
         <h2>Order confirmed</h2>
         <p>Your food is one the way</p>
     `
+}
+
+//menu Template
+function getMenuTemplate() {
+    return `                
+        <button onclick="closeBasket();" aria-label="homepage">
+            <a href="#homepage">
+                <img src="./img/home.png"alt="home icon" onmouseover="this.src='./img/active.png'" onmouseleave="this.src='./img/home.png'">
+            </a>
+        </button>
+        <button>
+            <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank">
+                <img src="./img/person.png" alt="person icon" onmouseover="this.src='./img/acdtive.png'"onmouseleave="this.src='./img/person.png'">
+            </a>
+        </button>
+        <button onclick="closeBasket();">
+            <a href="#dishsection">
+                <img src="./img/takeout_dining_2.png" alt="takeout dinning icon" onmouseover="this.src='./img/favicon.png'" onmouseleave="this.src='./img/takeout_dining_2.png'">
+            </a>
+        </button>
+        ${getShoppingCart()}
+        `
+}
+
+function getShoppingCart() {
+    if (myBasketDishes.totalamount >= 1) {
+        return `<button class="shoppingcart" onclick="getBasket();">
+                <img src="./img/shopping_cart_orange.png" alt="shopping cart icon"><span>${myBasketDishes.totalamount}</span>
+        </button>`
+    } else {
+        return `<button onclick="getBasket();">
+            <img src="./img/shopping_cart(1).png" alt="shopping cart icon" onmouseover="this.src='./img/activeshoppingcart.png'" onmouseleave="this.src='./img/shopping_cart(1).png'"></img>
+        </button>`
+    }
 }

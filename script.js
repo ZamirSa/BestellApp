@@ -40,18 +40,31 @@ function renderBasketDish(iDish) {
     basketContentRef.innerHTML += "";
     let price = myDishes[iDish].price.toFixed(2) + " €";
     let finalPrice = price.replaceAll(".", ",");
-    myBasketDishes.amount[iDish] = 1;
-
-    myBasketDishes.price[iDish] = myDishes[iDish].price;
-    let subtotalnumber = myBasketDishes.subtotal += myBasketDishes.price[iDish];
-    let subtotalnumberfixed = subtotalnumber.toFixed(2) + " €";
-    let subtotal = subtotalnumberfixed.replaceAll(".", ",");
-
+    getRenderBasketDishSubtotal(iDish);
+    renderMenu();
     getBasketButton(iDish);
-    getTotalNumber(subtotalnumber, iDish, subtotal);
     getEmptyBasket();
 
     basketContentRef.innerHTML += getBasketDishesTemplate(iDish, finalPrice);
+    let basketRef = document.getElementById("basket");
+    basketRef.classList.remove("displaynone");
+}
+
+function getRenderBasketDishSubtotal(iDish) {
+    myBasketDishes.amount[iDish] = 1;
+    myBasketDishes.totalamount += 1;
+
+    myBasketDishes.price[iDish] = myDishes[iDish].price;
+    let subtotalnumber = myBasketDishes.subtotal += myBasketDishes.price[iDish];
+
+    getSubtotal(iDish, subtotalnumber);
+}
+
+function getSubtotal(iDish, subtotalnumber) {
+    let subtotalnumberfixed = subtotalnumber.toFixed(2) + " €";
+    let subtotal = subtotalnumberfixed.replaceAll(".", ",");
+
+    getTotalNumber(subtotalnumber, iDish, subtotal);
 }
 
 //get total
@@ -71,32 +84,37 @@ function getPrice(iDish, subtotalnumber) {
     let finalPrice = price.replaceAll(".", ",");
     priceRef.innerHTML = finalPrice;
 
-    let subtotalnumberfixed = subtotalnumber.toFixed(2) + " €";
-    let subtotal = subtotalnumberfixed.replaceAll(".", ",");
-
-    getTotalNumber(subtotalnumber, iDish, subtotal);
+    getSubtotal(iDish, subtotalnumber);
 }
 
 //add amount
 function addAmount(iDish) {
     if (myBasketDishes.amount[iDish] < 20) {
         myBasketDishes.amount[iDish]++;
-
-        getAmountRef(iDish);
+        myBasketDishes.totalamount++;
         let subtotalnumber = myBasketDishes.subtotal += myBasketDishes.price[iDish];
-        getPrice(iDish, subtotalnumber);
+        renderallAmountandPrice(subtotalnumber, iDish);
         getBasketButton(iDish);
         getEmptyBasket();
-
         let basketDishRef = document.getElementById("dish" + iDish);
         basketDishRef.classList.remove("displaynone");
 
     } if (myBasketDishes.amount[iDish] > 1) {
-        let reduceAmountRef = document.getElementById("reduceAmount" + iDish);
-        reduceAmountRef.innerHTML = "-";
-        let trashRef = document.getElementById("trash" + iDish);
-        trashRef.innerHTML = `<button onclick="deleteBasketDish(${iDish});"><img src="./img/trash.png" alt="trashicon" onmouseover="this.src='./img/press.png'" onmouseleave="this.src='./img/trash.png'"></button>`;
+        addAmountifone(iDish);
     }
+}
+
+function renderallAmountandPrice(subtotalnumber, iDish) {
+    renderMenu();
+    getAmountRef(iDish);
+    getPrice(iDish, subtotalnumber);
+}
+
+function addAmountifone(iDish) {
+    let reduceAmountRef = document.getElementById("reduceAmount" + iDish);
+    reduceAmountRef.innerHTML = "-";
+    let trashRef = document.getElementById("trash" + iDish);
+    trashRef.innerHTML = `<button onclick="deleteBasketDish(${iDish});"><img src="./img/trash.png" alt="trashicon" onmouseover="this.src='./img/press.png'" onmouseleave="this.src='./img/trash.png'"></button>`;
 }
 
 //reduces Amount
@@ -104,14 +122,11 @@ function reduceAmount(iDish) {
     if (myBasketDishes.amount[iDish] > 2) {
         myBasketDishes.amount[iDish]--;
         let subtotalnumber = myBasketDishes.subtotal -= myBasketDishes.price[iDish];
+        myBasketDishes.totalamount--;
+        renderallAmountandPrice(subtotalnumber, iDish)
 
-        getAmountRef(iDish);
-        getPrice(iDish, subtotalnumber);
     } else if (myBasketDishes.amount[iDish] > 1) {
         reduceAmountifone(iDish);
-        let subtotalnumber = myBasketDishes.subtotal -= myBasketDishes.price[iDish];
-        getAmountRef(iDish);
-        getPrice(iDish, subtotalnumber);
 
     } else if (myBasketDishes.amount[iDish] > 0) {
         deleteBasketDish(iDish);
@@ -119,8 +134,16 @@ function reduceAmount(iDish) {
 }
 
 //adds trashicon instead of -
+function reduceSubtotal(iDish) {
+    myBasketDishes.amount[iDish]--
+    let subtotalnumber = myBasketDishes.subtotal -= myBasketDishes.price[iDish];
+    myBasketDishes.totalamount--;
+
+    reduceAmountifone(iDish);
+    renderallAmountandPrice(subtotalnumber, iDish)
+}
+
 function reduceAmountifone(iDish) {
-    myBasketDishes.amount[iDish]--;
     let reduceAmountRef = document.getElementById("reduceAmount" + iDish);
     reduceAmountRef.innerHTML = `<img src="./img/trash.png" alt="trashicon" onmouseover="this.src='./img/press.png'" onmouseleave="this.src='./img/trash.png'">`;
     let trashRef = document.getElementById("trash" + iDish);
@@ -142,11 +165,12 @@ function getAmountRef(iDish) {
 //deletes basketdish
 function deleteBasketDish(iDish) {
     let subtotalnumber = myBasketDishes.subtotal -= myBasketDishes.price[iDish] * myBasketDishes.amount[iDish];
+    myBasketDishes.totalamount -= myBasketDishes.amount[iDish];
     getPrice(iDish, subtotalnumber);
     getEmptyBasket();
-
-    myBasketDishes.amount[iDish] = 0;
+    renderMenu();
     removeAddedButton(iDish);
+    reduceAmountifone(iDish);
 
     let amountRef = document.getElementById("amount" + iDish);
     amountRef.innerHTML = `${myBasketDishes.amount[iDish]}`
@@ -156,6 +180,8 @@ function deleteBasketDish(iDish) {
 
 //removes display of added and plus button
 function removeAddedButton(iDish) {
+    myBasketDishes.amount[iDish] = 0;
+
     let basketDishRef = document.getElementById("dish" + iDish);
     basketDishRef.classList.add("displaynone");
 
@@ -190,6 +216,8 @@ function getEmptyBasket() {
     }
 }
 
+let closeTimer;
+
 //opens confirmationmessage
 function openDialog() {
     var element = document.getElementById("body");
@@ -202,25 +230,47 @@ function openDialog() {
     burgersRef = document.getElementById("burgers");
     burgersRef.classList.remove("displaynone");
 
+    closeTimer = setTimeout(closeDialog, 2500);
 }
 
 //closes confirmationmessage
 function closeDialog() {
+    clearTimeout(closeTimer);
     var element = document.getElementById("body");
     element.classList.remove("hidden");
+    let basketContentRef = document.getElementById("dishes");
+    basketContentRef.innerHTML = "";
     dialogRef.close();
-    location.reload();
+
+    let basketRef = document.getElementById("basket");
+    basketRef.classList.remove("displaynone");
+    basketRef.classList.add("basketdisplay");
+
+    reloadAll();
+}
+
+function reloadAll() {
+    myBasketDishes.totalamount = 0;
+    myBasketDishes.price = [];
+    myBasketDishes.amount = [];
+    myBasketDishes.subtotal = 0;
+    myBasketDishes.total = [];
+    pushAmount();
+    getEmptyBasket();
+    renderDishes();
+    renderMenu();
+    allDishPrice(0, "");
 }
 
 //toggles display none on basket
 function getBasket() {
-    basketRef = document.getElementById("basket");
+    let basketRef = document.getElementById("basket");
     basketRef.classList.toggle("basketdisplay");
 
-    burgersRef = document.getElementById("burgers");
+    let burgersRef = document.getElementById("burgers");
     burgersRef.classList.toggle("displaynone");
 
-    bodyRef = document.getElementById("body");
+    let bodyRef = document.getElementById("body");
     bodyRef.classList.toggle("hidden");
 }
 
@@ -234,4 +284,9 @@ function closeBasket() {
 
     bodyRef = document.getElementById("body");
     bodyRef.classList.remove("hidden");
+}
+
+function renderMenu() {
+    menuRef = document.getElementById("menu");
+    menuRef.innerHTML = getMenuTemplate();
 }

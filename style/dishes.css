@@ -1,8 +1,8 @@
 /*dishes*/
 .dishsections article {
     align-self: center;
-    padding-right: 800px;
     max-width: 1920px;
+    width: 80%;
 }
 
 .dishsections figure {
@@ -11,7 +11,6 @@
     background-color: rgba(253, 234, 220, 1);
     border-radius: 12px;
     gap: 30px;
-    width: 110%;
     padding: 15px;
 }
 
@@ -57,6 +56,15 @@ h4 {
     width: unset !important;
 }
 
+.amountbutton {
+    transition: none !important;
+}
+
+.amountbutton:hover {
+    scale: none !important;
+    box-shadow: none !important;
+}
+
 .priceandbutton {
     display: flex;
     flex-direction: column;
@@ -78,11 +86,6 @@ h4 {
 @media (max-width: 1470px) {
     .dishsections article {
         max-width: 1440px;
-        padding-right: 40%;
-    }
-
-    .dishsections figure {
-        width: 100%;
     }
 
     .dishsections article figure img {
@@ -97,13 +100,9 @@ h4 {
         font-size: 20px;
     }
 
-    .dishsections figcaption {
-        font-size: 14px;
-    }
-
     .priceandbutton button {
         padding: 10px;
-        font-size: 14px;
+        font-size: 16px;
         border-radius: 15px;
     }
 }
@@ -112,7 +111,7 @@ h4 {
 
     .dishsections article {
         max-width: 1230px;
-        width: 90%;
+        width: 85%;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -122,6 +121,7 @@ h4 {
 
     .dishsections figure {
         margin: 0;
+        width: 100%;
     }
 }
 
@@ -146,9 +146,6 @@ h4 {
         width: 100%;
     }
 
-    .priceandbutton button {
-        width: 115px;
-    }
 
     .priceandbutton div {
         flex-direction: row !important;
